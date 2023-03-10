@@ -1,17 +1,19 @@
 library("data.table")
 
+## Kaustubhya Shukla's work
+
 setwd("~/Desktop/datasciencecoursera/4_Exploratory_Data_Analysis/project/data")
 
-powerDT <- data.table::fread(input = "household_power_consumption.txt"
+powerDT1 <- data.table::fread(input = "household_power_consumption.txt"
                              , na.strings="?"
 )
 
 
-powerDT[, Global_active_power := lapply(.SD, as.numeric), .SDcols = c("Global_active_power")]
+powerDT1[, Global_active_power := lapply(.SD, as.numeric), .SDcols = c("Global_active_power")]
 
-powerDT[, dateTime := as.POSIXct(paste(Date, Time), format = "%d/%m/%Y %H:%M:%S")]
+powerDT1[, dateTime := as.POSIXct(paste(Date, Time), format = "%d/%m/%Y %H:%M:%S")]
 
-powerDT <- powerDT[(dateTime >= "2007-02-01") & (dateTime < "2007-02-03")]
+powerDT1 <- powerDT1[(dateTime >= "2007-02-01") & (dateTime < "2007-02-03")]
 
 png("plot3.png", width=480, height=480)
 
